@@ -1,38 +1,765 @@
-.App {
+
+/* ==== Base App Container ==== */
+.app-container {
+  min-height: 100vh;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Light Mode Default Background (before search) */
+.app-container:not(.has-data) {
+  background: linear-gradient(to bottom, #0077df, #ffffff);
+  color: #000;
+}
+
+/* After search (skyblue gradient) */
+.app-container.has-data {
+  background: linear-gradient(to bottom, #a2d2ff, #e0f7fa);
+  color: #000;
+}
+
+/* Dark Mode Overrides */
+.app-container.dark {
+  background: linear-gradient(to bottom, #0f172a, #000000);
+  color: #f1f1f1;
+}
+
+/* Input and Button Styles */
+.top-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.top-bar input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.top-bar button {
+  padding: 10px 14px;
+  border: none;
+  background-color: #0077b6;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.top-bar button:hover {
+  background-color: #00b4d8;
+  transform: scale(1.05);
+}
+
+.theme-toggle-icon {
+  font-size: 20px;
+}
+
+/* Dark mode top bar */
+.dark .top-bar input {
+  background: #333;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+.dark .top-bar button {
+  background-color: #00b4d8;
+}
+
+/* ==== Forecast Cards Section ==== */
+.forecast-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* ==== Welcome Message ==== */
+.welcome-message {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==== Forecast Card ==== */
+.forecast-card {
+  background: linear-gradient(to bottom, #e3f6fd, #ffffff);
+  border-radius: 15px;
+  padding: 16px;
   text-align: center;
+  width: 190px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+  animation: popIn 0.5s ease forwards;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.forecast-card:hover {
+  transform: scale(1.05);
+}
+
+.forecast-card.toggled {
+  background: linear-gradient(to bottom, #bee9f6, #ffffff);
+}
+
+/* Dark Mode Forecast Card */
+.dark .forecast-card {
+  background: linear-gradient(to bottom, #2a2a2a, #1f1f1f);
+  color: #f0f0f0;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+.dark .forecast-card.toggled {
+  background: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+}
+
+/* Forecast Content Styling */
+.forecast-card h4 {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #0077b6;
+}
+
+.forecast-card img {
+  width: 60px;
+  height: 60px;
+  margin: 10px auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.forecast-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #03045e;
+}
+
+.dark .forecast-card h4 {
+  color: #90e0ef;
+}
+
+.dark .forecast-card p {
+  color: #ade8f4;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .top-bar {
+    flex-direction: column;
+  }
+
+  .forecast-card {
+    width: 100%;
+  }
+}
+/* ==================== WEATHER CARD STYLES ==================== */
+.weather-card {
+  background: linear-gradient(to bottom right, #25b3e2, #e0f7fa);
+  border-radius: 20px;
+  padding: 1px;
+  width: 1050px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  animation: slideFadeIn 0.8s ease forwards;
+  transition: all 0.3s ease;
+}
+
+.weather-card h2 {
+  margin-bottom: 8px;
+  font-size: 22px;
+  color: #0077b6;
+}
+
+.weather-card img {
+  width: 80px;
+  height: 80px;
+  margin: 15px auto;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.2));
+}
+
+.weather-card p {
+  margin: 5px 0;
+  font-size: 19px;
+  color: #03045e;
+}
+
+/* Dark Mode for WeatherCard */
+.dark .weather-card {
+  background: linear-gradient(to bottom right, #34343c, #000000);
+  color: #e0e0e0;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+.dark .weather-card h2 {
+  color: #90e0ef;
+}
+
+.dark .weather-card p {
+  color: #ade8f4;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Forecast Card already has this (in case you missed) */
+.forecast-card {
+  animation: popIn 0.6s ease forwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.suggestions-list {
+  background: #fff;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  width: 200px;
+  z-index: 10;
+}
+
+.suggestions-list div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list div:hover {
+  background-color: #f0f0f0;
+}
+
+
+
+
+
+/* ------------------ Variables ------------------ */
+:root {
+  --primary: #a7d3f0; /* Soft sky blue */
+  --secondary: #7cb9e8; /* Calm blue */
+  --accent: #3b82f6; /* Vibrant blue accent */
+  --light-bg: #f6fbff;
+  --dark-bg: #0f172a;
+  --glass: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-dark: #1e293b;
+  --text-light: #f1f5f9;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --card-glow: 0 0 20px rgba(123, 196, 255, 0.5);
+}
+
+/* ------------------ Background Animation ------------------ */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #dbeafe, #e0f2fe, #f0f9ff, #e3f6fd);
+  background-size: 800% 800%;
+  animation: gradientBG 20s ease infinite;
+  color: var(--text-dark);
+  transition: all 0.4s ease;
+  overflow-x: hidden;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.dark body {
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  color: var(--text-light);
+}
+
+/* ------------------ Layout ------------------ */
+.app-container {
+  max-width: 1260px;
+  margin: auto;
+  padding: 1.5rem;
+  animation: fadeSlide 1s ease-in-out;
+}
+
+.top-bar {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 1rem;
+}
+
+/* ------------------ Search Section ------------------ */
+.search-section {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  min-width: 270px;
+}
+
+.search-section input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  font-size: 1rem;
+  border: 1px solid var(--glass-border);
+  transition: 0.3s ease;
+}
+
+.search-section input:focus {
+  outline: none;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.search-section button {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.search-section button:hover {
+  transform: scale(1.05);
+  box-shadow: var(--card-glow);
+}
+
+/* ------------------ Toggle Button ------------------ */
+.toggle-section button {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  border: none;
+  cursor: pointer;
+}
+
+.theme-toggle-icon {
+  font-size: 1.8rem;
+  color: var(--accent);
+  transition: transform 0.4s ease;
+}
+
+.theme-toggle-icon:hover {
+  transform: rotate(360deg) scale(1.2);
+}
+
+/* ------------------ Past Searches ------------------ */
+.past-searches {
+  margin-top: 1rem;
+}
+
+.search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.search-tag {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-dark);
+  transition: 0.3s ease;
+}
+
+.search-tag:hover {
+  background-color: #bae6fd;
+  transform: scale(1.05);
+  box-shadow: var(--card-glow);
+}
+
+.remove-icon {
+  color: rgb(163, 163, 163);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.remove-icon:hover {
+  transform: rotate(90deg);
+}
+
+/* ------------------ Welcome ------------------ */
+.welcome-message {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.fade-in {
+  font-size: 2.2rem;
+  background:rgb(255, 255, 255);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.slide-up {
+  color: rgb(248, 248, 248);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* ------------------ Forecast Section ------------------ */
+.forecast-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+  gap: 1.3rem;
+  margin-top: 2rem;
+}
+
+.forecast-card {
+  padding: 1.5rem;
+  background: rgba(250, 250, 250, 0.973);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  transition: 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  color: #1e293b;
+  position: relative;
+  overflow: hidden;
+}
+
+.forecast-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent); /* more transparent */
+  transform: rotate(45deg);
+  animation: cardGlow 8s linear infinite;
+  pointer-events: none; /* optional: prevent interaction issues */
+}
+
+
+.forecast-card:hover {
+  transform: scale(1.05);
+  background-color: #dbeafe;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15), 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+/* ------------------ Footer ------------------ */
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: red;
+}
+
+.dark .footer {
+  color: red;
+}
+
+/* ------------------ Animations ------------------ */
+@keyframes fadeSlide {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ------------------ Dark Mode Tweaks ------------------ */
+.dark .search-section input {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: #7cb9e8;
+}
+
+.dark .search-tag {
+  background: rgba(255, 255, 255, 0.08);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.dark .search-tag:hover {
+  background: #334155;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.dark .remove-icon {
+  color: #fceeee;
+}
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
   }
-  to {
-    transform: rotate(360deg);
+
+  .search-section {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-section input,
+  .search-section button {
+    width: 100%;
+  }
+
+  .forecast-section {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-message {
+    padding: 0 1rem;
+  }
+}
+
+/* ================== Responsive Enhancements ================== */
+
+/* Weather Card Responsiveness */
+/* Medium devices (tablets, small laptops) */
+@media (max-width: 1024px) {
+  .weather-card {
+    width: 90%;
+  }
+
+  .forecast-card {
+    width: 45%;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-section {
+    flex-direction: column;
+  }
+
+  .search-section input,
+  .search-section button {
+    width: 100%;
+  }
+}
+
+/* Small devices (phones, small tablets) */
+@media (max-width: 768px) {
+  .forecast-card {
+    width: 100%;
+  }
+
+  .weather-card {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .search-section input,
+  .search-section button {
+    font-size: 15px;
+    padding: 10px 14px;
+  }
+
+  .forecast-card h4,
+  .forecast-card p,
+  .weather-card h2,
+  .weather-card p {
+    font-size: 14px;
+  }
+
+  .forecast-card img,
+  .weather-card img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .top-bar,
+  .search-section {
+    gap: 10px;
+  }
+
+  .city-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Extra small devices (older phones, very small screens) */
+@media (max-width: 480px) {
+  .weather-card {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .search-section input,
+  .search-section button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .forecast-card h4,
+  .forecast-card p,
+  .weather-card h2,
+  .weather-card p {
+    font-size: 13px;
+  }
+
+  .forecast-card img,
+  .weather-card img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .top-bar {
+    gap: 8px;
+  }
+
+  .footer,
+  .city-info {
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+  }
+}
+
+/* Android phones (common widths: 360px–412px) */
+@media (max-width: 420px) {
+  .weather-card {
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+  }
+
+  .forecast-card {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  .forecast-card h4,
+  .forecast-card p,
+  .weather-card h2,
+  .weather-card p {
+    font-size: 13px;
+  }
+
+  .forecast-card img,
+  .weather-card img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .search-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .search-section input,
+  .search-section button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .city-info {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 13px;
+  }
+
+  .footer {
+    font-size: 12px;
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  body {
+    font-size: 14px;
+    overflow-x: hidden;
+  }
+}
+
+/* Ultra-small screens like iPhone SE, Android 360px - 375px wide */
+@media (max-width: 390px) {
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    padding: 0 10px;
+  }
+
+  .search-section input,
+  .search-section button {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .search-section button {
+    font-weight: 600;
+  }
+
+  .weather-card,
+  .forecast-card {
+    margin: 0 auto;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .weather-card h2,
+  .weather-card p,
+  .forecast-card h4,
+  .forecast-card p {
+    font-size: 13px;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 }
