@@ -1,4 +1,4 @@
-
+/* 
 /* ==== Base App Container ==== */
 .app-container {
   min-height: 100vh;
@@ -158,15 +158,7 @@
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  .top-bar {
-    flex-direction: column;
-  }
 
-  .forecast-card {
-    width: 100%;
-  }
-}
 /* ==================== WEATHER CARD STYLES ==================== */
 .weather-card {
   background: linear-gradient(to bottom right, #25b3e2, #e0f7fa);
@@ -529,44 +521,8 @@ body {
 }
 
 /* ------------------ Responsive ------------------ */
-@media (max-width: 768px) {
-  .top-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .search-section {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .search-section input,
-  .search-section button {
-    width: 100%;
-  }
-
-  .forecast-section {
-    grid-template-columns: 1fr;
-  }
-
-  .welcome-message {
-    padding: 0 1rem;
-  }
-}
-
-/* ================== Responsive Enhancements ================== */
-
-/* Weather Card Responsiveness */
-/* Medium devices (tablets, small laptops) */
+/* ------------------ Responsive Styling ------------------ */
 @media (max-width: 1024px) {
-  .weather-card {
-    width: 90%;
-  }
-
-  .forecast-card {
-    width: 45%;
-  }
-
   .top-bar {
     flex-direction: column;
     gap: 15px;
@@ -574,29 +530,35 @@ body {
 
   .search-section {
     flex-direction: column;
+    width: 100%;
   }
 
   .search-section input,
   .search-section button {
     width: 100%;
   }
-}
 
-/* Small devices (phones, small tablets) */
-@media (max-width: 768px) {
-  .forecast-card {
-    width: 100%;
+  .weather-card {
+    width: 90%;
   }
 
+  .forecast-section {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .forecast-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
   .weather-card {
     width: 95%;
     padding: 10px;
   }
 
-  .search-section input,
-  .search-section button {
-    font-size: 15px;
-    padding: 10px 14px;
+  .forecast-card {
+    width: 100%;
   }
 
   .forecast-card h4,
@@ -612,6 +574,12 @@ body {
     height: 50px;
   }
 
+  .search-section input,
+  .search-section button {
+    font-size: 15px;
+    padding: 10px 14px;
+  }
+
   .top-bar,
   .search-section {
     gap: 10px;
@@ -621,19 +589,18 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .welcome-message {
+    padding: 0 1rem;
+  }
 }
 
-/* Extra small devices (older phones, very small screens) */
 @media (max-width: 480px) {
-  .weather-card {
+  .weather-card,
+  .forecast-card {
     width: 100%;
     padding: 8px;
-  }
-
-  .search-section input,
-  .search-section button {
-    font-size: 14px;
-    padding: 8px 12px;
+    margin: 0 auto;
   }
 
   .forecast-card h4,
@@ -649,8 +616,17 @@ body {
     height: 40px;
   }
 
+  .search-section input,
+  .search-section button {
+    font-size: 14px;
+    padding: 8px 12px;
+    align-items: center;
+  }
+
   .top-bar {
     gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .footer,
@@ -659,20 +635,19 @@ body {
     text-align: center;
     padding: 5px;
   }
+
+  body {
+    font-size: 14px;
+    overflow-x: hidden;
+  }
 }
 
-/* Android phones (common widths: 360px–412px) */
 @media (max-width: 420px) {
-  .weather-card {
-    width: 100%;
-    padding: 10px;
-    margin: 0 auto;
-  }
-
+  .weather-card,
   .forecast-card {
-    width: 100%;
-    margin-bottom: 10px;
     padding: 10px;
+    width: 90%;
+    margin: 0 auto 10px 7px;
   }
 
   .forecast-card h4,
@@ -690,21 +665,15 @@ body {
 
   .search-section {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     gap: 8px;
   }
 
-  .search-section input,
+ 
   .search-section button {
-    width: 100%;
+    width: 70%;
     padding: 10px;
     font-size: 14px;
-  }
-
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
 
   .city-info {
@@ -725,30 +694,256 @@ body {
   }
 }
 
-/* Ultra-small screens like iPhone SE, Android 360px - 375px wide */
 @media (max-width: 390px) {
   .search-section {
     flex-direction: column;
     gap: 10px;
-    align-items: stretch;
+    align-items: center;
     padding: 0 10px;
   }
 
   .search-section input,
   .search-section button {
-    width: 100%;
+    width: 90%;
     font-size: 13px;
     padding: 10px;
-  }
-
-  .search-section button {
     font-weight: 600;
   }
 
   .weather-card,
   .forecast-card {
-    margin: 0 auto;
     width: 100%;
+    margin: 0 auto 10px -8px;
+    padding: 8px;
+  }
+
+  .weather-card h2,
+  .weather-card p,
+  .forecast-card h4,
+  .forecast-card p {
+    font-size: 13px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 430px) {
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .search-section input
+  {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+  .search-section button
+  {
+    width: 85%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .weather-card,
+  .forecast-card {
+    width: 100%;
+    margin: 0 auto 10px -8px;
+    padding: 8px;
+  }
+
+  .weather-card h2,
+  .weather-card p,
+  .forecast-card h4,
+  .forecast-card p {
+    font-size: 13px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+@media (max-width: 360px) {
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .search-section input
+  {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+  .search-section button
+  {
+    width: 80%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .weather-card,
+  .forecast-card {
+    width: 100%;
+    margin: 0 auto 10px -8px;
+    padding: 8px;
+  }
+
+  .weather-card h2,
+  .weather-card p,
+  .forecast-card h4,
+  .forecast-card p {
+    font-size: 13px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+@media (max-width: 412px) {
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .search-section input
+  {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+  .search-section button
+  {
+    width: 70%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+}
+@media (max-width: 768px) {
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .search-section input
+  {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+  .search-section button
+  {
+    width: 65%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .weather-card,
+  .forecast-card {
+    width: 100%;
+    margin: 0 auto 10px -8px;
+    padding: 8px;
+  }
+
+  .weather-card h2,
+  .weather-card p,
+  .forecast-card h4,
+  .forecast-card p {
+    font-size: 13px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 1024px) {
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .search-section input
+  {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+  .search-section button
+  {
+    width: 60%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .weather-card,
+  .forecast-card {
+    width: 100%;
+    margin: 0 auto 10px -8px;
+    padding: 8px;
+  }
+
+  .weather-card h2,
+  .weather-card p,
+  .forecast-card h4,
+  .forecast-card p {
+    font-size: 13px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+@media (max-width: 768px) {
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .search-section input
+  {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+  .search-section button
+  {
+    width: 65%;
+    font-size: 13px;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  .weather-card,
+  .forecast-card {
+    width: 100%;
+    margin: 0 auto 10px -8px;
     padding: 8px;
   }
 
